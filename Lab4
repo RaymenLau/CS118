@@ -1,0 +1,31 @@
+.data
+
+x:
+
+	.long 1    //0
+	.long 2    //4
+	.long 4    //8
+	.long 8    //12
+	.long 0    //16
+
+sum:
+	.long 0
+
+.txt
+.globle_main
+
+_main:
+
+	movl   $0 ,%ebx
+	movl   $x ,%ecx
+
+top:
+
+	addl  (%ecx),%ebx
+	addl  $4,%ecx
+        movl  (%ecx),%eax
+	jnz   top
+
+done:
+
+	movl  %ebx,sum
