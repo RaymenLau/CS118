@@ -1,31 +1,40 @@
+# JiamingLiu
+# CS118 Lab4 
+# July 5, 2020 
+/* 
+This is a program will stop add up the number
+store in x's address until the counter become 0
+*/
+
+
 .data
 
 x:
 
-	.long 1    //0
-	.long 2    //4
-	.long 4    //8
-	.long 8    //12
-	.long 0    //16
-
-sum:
+	.long 1         #the number need to be add
+	.long 2
+	.long 3
+	.long 4
 	.long 0
 
+sum:
+
+	.long 0          #the sum of all number
+
+
 .txt
-.globle_main
+.globl _start
 
-_main:
-
-	movl   $0 ,%ebx
-	movl   $x ,%ecx
+_start:
+	movl $5, %eax   #register eax store the counter 5, it will run the loop 5 times
+	movl $0, %ebx   #store the sum of the number in x to ebx
+	movl $x, %ecx   #store the address of x to ecx
 
 top:
-
-	addl  (%ecx),%ebx
-	addl  $4,%ecx
-        movl  (%ecx),%eax
-	jnz   top
+	addl (%ecx),%ebx  #add the value of number store in x add to ebx
+	addl $4, %ecx     #address move to next x number (eax+4)
+	decl %eax         #counter --
+	jnz  top          #if counter not zero, jump to the top of the loop
 
 done:
-
-	movl  %ebx,sum
+	movl %ebx, sum    #end of the program, move the ebx's value to sum
